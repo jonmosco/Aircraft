@@ -1,51 +1,48 @@
 package edu.dtcc.csc214.aircraft;
 
-public class Aircraft {
+import java.util.Observable;
+import java.util.Observer;
+
+public class Aircraft implements Observer {
+
+	private static final double RadiansPerDegree = Math.PI / 180.0;
+	private static final int SecondsInAnHour = 60 * 60;
+	private static final double milesPerLattitudeDegree = 69.0;
+	private static final double milesPerLongitudeDegree = 69.172;
 	
-	private static final Double RadiansPerDegree = Math.PI / 180.0;  
-	final Double milesPerLattitudeDegree = 69.0;
-	final Double milesPerLongitudeDegree = 69.172;
-
+	// current aircraft movements 
+	private double currentMilesPerHour = 0.0;
+	private double currentLongitude = -74.0059;
+	private double currentLatitude = 40.7127;
+	private double currentHeading = 0.0;
 	
-	Double currentLongitude = -74.0059;
-	Double currentLatitude = 40.7127;
-	
-	void move(Double numberOfSeconds) { 
-		Double milesPerSecond = milesPerHour / SecondsInAnHour; 
-		Double distance = milesPerSecond * numberOfSeconds;  
-		 
-		Double deltaX = (Math.cos(headingInRadian) * distance);
-		Double deltaY = (Math.sin(headingInRadian) * distance); 
-		 
-		lastLongitude = currentLongitude;
-		lastLatitude = currentLatitude;
+	// time deltas
+	private long lastChange = 0;
 
-		currentLongitude = (deltaX / milesPerLongitudeDegree) + lastLongitude;
-		currentLatitude = (deltaY / milesPerLattitudeDegree) + lastLatitude; 
-}
+	void move(long numberOfMilliSeconds) {
 
-
-	private void convertFromUserHeadingToInternalHeadingInRadian() {
-		Double internalHeading = 0.0;
+		double milesPerSecond = currentMilesPerHour / SecondsInAnHour;
+		double distance = milesPerSecond * numberOfMilliSeconds / 1000.0;
+		double headingInRadian = currentHeading * RadiansPerDegree;
 		
-		if (userHeading >= 0 && userHeading < 90) {
-			// first quadrant
-			internalHeading = 90 - userHeading;
-		} else if (userHeading >= 90 && userHeading < 180) {
-			// fourth quadrant
-			internalHeading = -(userHeading - 90);
-		} else if (userHeading < 0 && userHeading > -90) {
-			// second quadrant
-			internalHeading = 90 + Math.abs(userHeading);
-		} else if (userHeading <= -90 && userHeading >= -180) {
-			internalHeading = 90 + Math.abs(userHeading);
-		}
-		 
-		Double userHeadingInRadian = internalHeading * RadiansPerDegree;
-		// adjust the rotation by PI/2
-		setHeadingInRadian(userHeadingInRadian);
-		System.out.println("Setting new internal heading:" + headingInRadian);
-}
+		double deltaX = (Math.cos(headingInRadian) * distance);
+		double deltaY = (Math.sin(headingInRadian) * distance);
+		
+		currentLongitude += (deltaX / milesPerLongitudeDegree);
+		currentLatitude += (deltaY / milesPerLattitudeDegree);
 
+	}
+
+	public void update(Observable o, Object arg) {
+		
+		long ticks = System.currentTimeMillis();
+		
+		long elapsedTimeInMillSinceMovement = ticks - lastChange;
+		
+		lastChange = ticks;
+		
+		move(elapsedTimeInMillSinceMovement);
+		
+	}
 
 }

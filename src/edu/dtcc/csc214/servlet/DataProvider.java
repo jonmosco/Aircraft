@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class DataProvider
  */
 
-@WebServlet("/DataProvider")
+@WebServlet("/GetSampleCount")
+
 public class DataProvider extends HttpServlet {
 	
 	
@@ -34,6 +35,7 @@ public class DataProvider extends HttpServlet {
 		 * to create all objects and the related objects. It then sets the
 		 *  observable pattern and kick off the thread (ScheduledTask). 
 		 */
+		
 		SystemDriver ourDriver = new SystemDriver();
 		
 		// create our thread
@@ -41,14 +43,11 @@ public class DataProvider extends HttpServlet {
         
         // create our scheduled task
         ScheduledTask ourTask = new ScheduledTask();
-]
         
         myThread.start();
 		
 	}
 		
-	
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)

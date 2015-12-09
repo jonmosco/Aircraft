@@ -5,16 +5,15 @@ import java.util.Observable;
 public class SystemDriver extends Observable implements Runnable {
 	
 	public static void main(String[] args) {
+		
+		Aircraft ourAircraft = new Aircraft();
 	
         ScheduledTask ourTask = new ScheduledTask();
 
         // create our thread
         Thread myThread = new Thread(ourTask);
 
-        // Create a Scheduled Task instance
-        ScheduledTask newTask = new ScheduledTask();
-
-        ourTask.addObserver(newTask);
+        ourTask.addObserver(ourAircraft);
 
         myThread.start();
         

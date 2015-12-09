@@ -25,6 +25,19 @@ fieldset {
 </style>
 
 <script>
+
+	function initSytem() {
+		
+	}
+
+	function setHeading() {
+		
+	}
+
+	function setSpeed() {
+		
+	}
+
 	function alertContents(httpRequest) {
 		if (httpRequest.readyState == 4 && httpRequest.status == 200) {
 			var data = httpRequest.responseText;
@@ -49,6 +62,7 @@ fieldset {
 	setInterval(function() {
 		getStatus();
 	}, 3000);
+	
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -56,7 +70,9 @@ fieldset {
 </head>
 <body>
 
-<% SystemDriver aSystemDriver = new SystemDriver(); %>
+	<%
+		SystemDriver aSystemDriver = new SystemDriver();
+	%>
 
 	<h3>My Airplane Simulation</h3>
 
@@ -64,11 +80,14 @@ fieldset {
 		<legend>Simulation Details</legend>
 
 		<div class="controls">
-			<button type="button" name="sysinit">Init System</button>
+			<button type="button" id="sysinit" onclick="initSystem()">Init
+				System</button>
 			<br>
-			<button type="button" id="setHeading">Set Heading to 45 degrees</button>
+			<button type="button" id="setHeading" onclick="setHeading()">Set
+				Heading to 45 degrees</button>
 			<br>
-			<button type="button" id="setSpeed">Set Speed to 500 miles per hour</button>
+			<button type="button" id="setSpeed" onclick="setSpeed()">Set
+				Speed to 500 miles per hour</button>
 
 			<h4>Heading</h4>
 			<input type="range" id="heading" value="180" min="-180" max="180">
