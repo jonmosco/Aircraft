@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DataProvider extends HttpServlet {
 	
-	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -25,11 +24,9 @@ public class DataProvider extends HttpServlet {
 	 */
 	public DataProvider() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void init() {
-		
 		/*
 		 * In the DataProvider init() method, it will ask the SystemDriver 
 		 * to create all objects and the related objects. It then sets the

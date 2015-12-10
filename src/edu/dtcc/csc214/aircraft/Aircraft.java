@@ -19,7 +19,7 @@ public class Aircraft implements Observer {
 	// time deltas
 	private long lastChange = 0;
 
-	void move(long numberOfMilliSeconds) {
+	public void move(long numberOfMilliSeconds) {
 
 		double milesPerSecond = currentMilesPerHour / SecondsInAnHour;
 		double distance = milesPerSecond * numberOfMilliSeconds / 1000.0;
@@ -31,6 +31,38 @@ public class Aircraft implements Observer {
 		currentLongitude += (deltaX / milesPerLongitudeDegree);
 		currentLatitude += (deltaY / milesPerLattitudeDegree);
 
+	}
+
+	public double getCurrentMilesPerHour() {
+		return currentMilesPerHour;
+	}
+
+	public void setCurrentMilesPerHour(double currentMilesPerHour) {
+		this.currentMilesPerHour = currentMilesPerHour;
+	}
+
+	public double getCurrentLongitude() {
+		return currentLongitude;
+	}
+
+	public void setCurrentLongitude(double currentLongitude) {
+		this.currentLongitude = currentLongitude;
+	}
+
+	public double getCurrentLatitude() {
+		return currentLatitude;
+	}
+
+	public void setCurrentLatitude(double currentLatitude) {
+		this.currentLatitude = currentLatitude;
+	}
+
+	public double getCurrentHeading() {
+		return currentHeading;
+	}
+
+	public void setCurrentHeading(double currentHeading) {
+		this.currentHeading = currentHeading;
 	}
 
 	public void update(Observable o, Object arg) {
