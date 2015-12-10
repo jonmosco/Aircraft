@@ -45,16 +45,8 @@ public class Aircraft implements Observer {
 		return currentLongitude;
 	}
 
-	public void setCurrentLongitude(double currentLongitude) {
-		this.currentLongitude = currentLongitude;
-	}
-
 	public double getCurrentLatitude() {
 		return currentLatitude;
-	}
-
-	public void setCurrentLatitude(double currentLatitude) {
-		this.currentLatitude = currentLatitude;
 	}
 
 	public double getCurrentHeading() {
